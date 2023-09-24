@@ -5,8 +5,27 @@ import QuoteCard from "@/Components/QuoteCard.vue";
 
 <script>
 export default {
-    props: {
-        quotes: Array,
+    computed: {
+        orderedQuotes() {
+            return this.quotes.sort((a, b) => {
+                return b.upvotes - a.upvotes;
+            })
+        }
+    },
+    data() {
+        return {
+            quotes: [],
+        }
+    },
+    methods: {
+        getQuotes() {
+            axios.get('/quotes').then((response) => {
+                this.quotes = response.data['data'];
+            });
+        },
+    },
+    created() {
+        this.getQuotes();
     }
 }
 </script>
@@ -22,7 +41,12 @@ export default {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <QuoteCard v-for="quote in quotes" :quote="quote"/>
+                    <QuoteCard
+                        v-if="orderedQuotes.length > 0"
+                        v-for="quote in orderedQuotes"
+                        :quote="quote"
+                        @quote-voted="getQuotes()"
+                    />
                 </div>
             </div>
         </div>

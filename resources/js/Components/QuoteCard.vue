@@ -1,18 +1,16 @@
-<script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-</script>
-
 <script>
 export default {
     props: {
-        quote: Object,
+        key: Number,
+        quote: Object, // this could be stricter typed
     },
-    computed: {
-        upvotes() {
-            return this.quote.user_quote_votes.filter((user_quote_vote) => user_quote_vote.positive).length;
-        },
-        downvotes(){
-            return this.quote.user_quote_votes.filter((user_quote_vote) => !user_quote_vote.positive).length;
+    methods: {
+        vote(positive) {
+            axios.post('/quote/' + this.quote.id + '/vote', {
+                positive: positive
+            }).then(() => {
+                this.$emit('quote-voted');
+            });
         }
     }
 }
@@ -21,21 +19,30 @@ export default {
 <template>
     <div>
         <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-            <p>
+            <h1>
                 {{ quote.quote }}
-            </p>
-            <p> - {{ quote.character_name }}, {{ quote.movie_name }}</p>
+            </h1>
+            <h2> - {{ quote.character_name }}, {{ quote.movie_name }}</h2>
             <div class="vote-icons">
-                <div class="vote-up">
-                    <span>👍</span>
-                    <span>
-                        {{ upvotes }}
+                <div>
+                    <button
+                        class="icon bg-blue"
+                        @click="vote(true)"
+                        :class="{ active: quote.user_vote === true}"
+                    >👍</button>
+                    <span class="count">
+                        {{ quote.upvotes }}
                     </span>
                 </div>
-                <div class="vote-icon vote-down">
-                    <span>👎</span>
-                    <span>
-                        {{ downvotes }}
+                <div>
+                    <button
+                        class="icon bg-blue"
+                        @click="vote(false)"
+                        :class="{ active: quote.user_vote === false}">
+                        👎
+                    </button>
+                    <span class="count">
+                        {{ quote.downvotes }}
                     </span>
                 </div>
             </div>
@@ -44,3 +51,24 @@ export default {
 
     </div>
 </template>
+
+<style>
+.vote-icons {
+    margin: 2rem;
+
+    .icon {
+        font-size: x-large;
+        cursor: pointer;
+        min-width: 3rem;
+
+        &.active{
+            font-size: xx-large;
+        }
+    }
+
+    .count {
+        font-size: x-large;
+        margin: 2rem;
+    }
+}
+</style>

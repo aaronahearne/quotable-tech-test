@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Resources\QuoteResource;
+use App\Models\Quote;
+use App\Models\UserQuoteVote;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,16 +32,26 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        $quote = \App\Models\Quote::factory()->make([
-            'quote' => "I'm not a horse, I'm a man of action!",
-            'character_name' => 'Indiana Jones',
-            'movie_name' => 'Indiana Jones and the Last Crusade',
+    Route::get('/quote-list', function () {
+        return Inertia::render('QuoteList');
+    })->name('quote-list');
+
+    // Solid: These should be extracted to Controllers and moved into api routes
+    Route::get('/quotes', function () {
+        return QuoteResource::collection(
+            Quote::all()
+        );
+    });
+
+    Route::post('/quote/{id}/vote', function () {
+        UserQuoteVote::updateOrCreate([
+            'user_id' => auth()->user()->id,
+            'quote_id' => request()->id,
+        ], [
+            'positive' => (bool)request()->positive,
         ]);
 
-        $quotes = \App\Models\Quote::with('userQuoteVotes')->get();
-
-
-        return Inertia::render('QuoteList', ['quotes' => $quotes]);
-    })->name('dashboard');
+        // return HTTP 200 OK
+        return response()->json();
+    })->name('quote.vote');
 });

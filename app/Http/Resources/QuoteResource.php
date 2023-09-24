@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class QuoteResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            ...parent::toArray($request),
+            'upvotes' => $this->upvotes(),
+            'downvotes' => $this->downvotes(),
+            'total_score' => $this->totalScore(),
+            'user_vote' => $this->userQuoteVotes()
+                ->where('user_id', auth()->user()->getKey())
+                ->first()?->positive ?? null,
+        ];
+    }
+}

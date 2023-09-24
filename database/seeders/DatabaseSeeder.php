@@ -15,19 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         \App\Models\User::factory()->create([
+        // These should be extracted into individual seeders
+        User::factory()->create([
              'name' => 'User A',
              'email' => 'usera@example.com',
              'password' => bcrypt('password')
          ]);
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'User B',
             'email' => 'userb@example.com',
             'password' => bcrypt('password')
         ]);
 
-        Quote::factory()->count(3)->create();
+        User::factory()->count(9)->create();
+
+        Quote::factory()->count(4)->create();
 
         User::all()->each(function($user){
             Quote::all()->each(function($quote) use ($user){
