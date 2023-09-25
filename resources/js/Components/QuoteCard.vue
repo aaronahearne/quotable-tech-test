@@ -27,14 +27,8 @@ export default {
         <div class="pill">
             🎬 {{ quote.movie_name }}
         </div>
-
-        <div class="mb-10 vote-icons" style="margin-top: 1rem">
-            <button class="icon text-3xl">
-                ❤️
-            </button>
-            <span class="count">
-                    {{ quote.upvotes - quote.downvotes }}
-                </span>
+        <div class="pill">
+            ❤  {{ quote.upvotes - quote.downvotes }}
         </div>
 
         <div class="vote-icons">
@@ -70,9 +64,10 @@ export default {
 }
 
 .quote {
-    font-size: x-large;
+    font-size: xx-large;
     margin: 2rem;
     margin-left: inherit;
+    font-family: 'Cutive', serif;
 }
 
 .pill {

@@ -38,7 +38,7 @@ const logout = () => {
                     <div class="flex justify-center h-30">
                         <div class="flex">
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <span style="font-size: xxx-large" class="p-4">
+                                <span style="font-size: xxx-large; font-family: 'Cutive', serif;" class="p-4">
                                     🍿 Quotable  💬
                                 </span>
                             </div>
