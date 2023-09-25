@@ -28,11 +28,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
 
-        User::factory()->count(9)->create();
-
         Quote::factory()->count(4)->create();
 
-        User::all()->each(function($user){
+        User::factory()->count(9)->create()->each(function($user){
             Quote::all()->each(function($quote) use ($user){
                 UserQuoteVote::factory()->create([
                     'user_id' => $user->id,
