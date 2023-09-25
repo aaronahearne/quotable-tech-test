@@ -19,10 +19,15 @@ export default {
 <template>
     <div>
         <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-            <h1>
-                {{ quote.quote }}
+            <h1 class="quote">
+                "{{ quote.quote }}"
             </h1>
-            <h2> - {{ quote.character_name }}, {{ quote.movie_name }}</h2>
+            <div class="pill">
+                💬 {{ quote.character_name }}
+            </div>
+            <div class="pill">
+                🎬 {{ quote.movie_name }}
+            </div>
             <div class="vote-icons">
                 <div>
                     <button
@@ -52,8 +57,27 @@ export default {
 </template>
 
 <style>
+.quote {
+    font-size: x-large;
+    margin: 2rem;
+    margin-left: inherit;
+}
+
+.pill {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    border-radius: 16px;
+}
+
 .vote-icons {
     margin: 2rem;
+    margin-left: inherit;
 
     .icon {
         font-size: x-large;
@@ -61,7 +85,7 @@ export default {
         min-width: 3rem;
 
         &.active{
-            font-size: xx-large;
+            font-size: xxx-large;
         }
     }
 
