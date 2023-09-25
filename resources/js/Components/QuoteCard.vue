@@ -17,54 +17,58 @@ export default {
 </script>
 
 <template>
-    <div>
-        <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-            <h1 class="quote">
-                "{{ quote.quote }}"
-            </h1>
-            <div class="pill">
-                💬 {{ quote.character_name }}
-            </div>
-            <div class="pill">
-                🎬 {{ quote.movie_name }}
-            </div>
-            <div class="vote-icons">
-                <div>
-                    <button
-                        class="icon"
-                        @click="vote(true)"
-                        :class="{ active: quote.user_vote === true}"
-                    >👍</button>
-                    <span class="count">
-                        {{ quote.upvotes }}
-                    </span>
-                </div>
-                <div>
-                    <button
-                        class="icon"
-                        @click="vote(false)"
-                        :class="{ active: quote.user_vote === false}">
-                        👎
-                    </button>
-                    <span class="count">
-                        {{ quote.downvotes }}
-                    </span>
-                </div>
-                <div class="mt-4">
-                    <button class="icon">
-                        🏆
-                    </button>
-                    <span class="count">
-                        {{ quote.upvotes - quote.downvotes }}
-                    </span>
-                </div>
-            </div>
+    <div class="p-6 lg:p-8 border-b border-gray-200 quote-card">
+        <h1 class="quote">
+            "{{ quote.quote }}"
+        </h1>
+        <div class="pill">
+            💬 {{ quote.character_name }}
+        </div>
+        <div class="pill">
+            🎬 {{ quote.movie_name }}
+        </div>
 
+        <div class="mb-10 vote-icons" style="margin-top: 1rem">
+            <button class="icon text-3xl">
+                ❤️
+            </button>
+            <span class="count">
+                    {{ quote.upvotes - quote.downvotes }}
+                </span>
+        </div>
+
+        <div class="vote-icons">
+            <div>
+                <button
+                    class="icon"
+                    @click="vote(true)"
+                    :class="{ active: quote.user_vote === true}"
+                >👍
+                </button>
+                <span class="count">
+                    {{ quote.upvotes }}
+                </span>
+            </div>
+            <div>
+                <button
+                    class="icon"
+                    @click="vote(false)"
+                    :class="{ active: quote.user_vote === false}">
+                    👎
+                </button>
+                <span class="count">
+                    {{ quote.downvotes }}
+                </span>
+            </div>
         </div>
     </div>
 </template>
 
 <style>
+.quote-card {
+    background-color: #FCF6F5;
+}
+
 .quote {
     font-size: x-large;
     margin: 2rem;
