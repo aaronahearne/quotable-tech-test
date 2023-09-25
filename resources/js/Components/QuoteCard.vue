@@ -31,7 +31,7 @@ export default {
             <div class="vote-icons">
                 <div>
                     <button
-                        class="icon bg-blue"
+                        class="icon"
                         @click="vote(true)"
                         :class="{ active: quote.user_vote === true}"
                     >👍</button>
@@ -41,13 +41,21 @@ export default {
                 </div>
                 <div>
                     <button
-                        class="icon bg-blue"
+                        class="icon"
                         @click="vote(false)"
                         :class="{ active: quote.user_vote === false}">
                         👎
                     </button>
                     <span class="count">
                         {{ quote.downvotes }}
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <button class="icon">
+                        🏆
+                    </button>
+                    <span class="count">
+                        {{ quote.upvotes - quote.downvotes }}
                     </span>
                 </div>
             </div>
