@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(QuoteSeeder::class);
+
         // These should be extracted into individual seeders
         User::factory()->create([
              'name' => 'User A',
@@ -27,8 +29,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'userb@example.com',
             'password' => bcrypt('password')
         ]);
-
-        Quote::factory()->count(4)->create();
 
         User::factory()->count(9)->create()->each(function($user){
             Quote::all()->each(function($quote) use ($user){
