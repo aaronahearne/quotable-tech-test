@@ -7,26 +7,21 @@ Full Stack Laravel example of a favourite Movie Quote voting system.
 ### Task
 
 MQDB: Movie Quotes Database
-Our latest venture is to build out the definitive "move quotes database". This web app will be used
-by movie lovers to review and vote on which movie quote should be named the "best move quote
-of all time".
-The end goal is to build a community of movie lovers who can interact with each other through
-the platform, and engage in conversations about their love for movies, however the first step is to
-build out the "movie quote ranking" feature. This MVP web app should display a list of famous
-movie quotes, ordered by popularity, which can be voted up and / or down by visitors to the web
-site.
-The list of movie quotes should be re-ordered each time a site visitor submits their vote, to reflect
-the latest popularity order.
+Our latest venture is to build out the definitive "movie quotes database". This web app will be used by movie lovers to review and vote on which movie quote should be named the "best move quote of all time".
+
+The end goal is to build a community of movie lovers who can interact with each other through the platform, and engage in conversations about their love for movies, however the first step is to build out the "movie quote ranking" feature. This MVP web app should display a list of famous movie quotes, ordered by popularity, which can be voted up and / or down by visitors to the web site.
+
+The list of movie quotes should be re-ordered each time a site visitor submits their vote, to reflect the latest popularity order.
+
 The web app must:
-• Present a list of movie quotes, ordered by popularity
-• Provide a mechanism for web app visitors to vote a quote up or down, which will affect the
+- Present a list of movie quotes, ordered by popularity
+- Provide a mechanism for web app visitors to vote a quote up or down, which will affect the
 order of the movie quotes.
-• Display the movie quotes based on data stored in a SQL database
+- Display the movie quotes based on data stored in a SQL database
 All data should be persisted in a SQL database, and be fetched/created/updated via HTTP
 requests to the Laravel application.
-We are not necessarily looking for any user authentication / authorisation here, unless you feel
-that this is achievable in a short space of time. We would like to discuss how your web app could
-be extended to achieve this, however.
+
+We are not necessarily looking for any user authentication / authorisation here, unless you feel that this is achievable in a short space of time. We would like to discuss how your web app could be extended to achieve this, however.
 
 ## Features
 - Dockerised via Laravel Sail
